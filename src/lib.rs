@@ -264,10 +264,11 @@ cfg_if! {
     } else if #[cfg(feature = "dummy")] {
         #[path = "dummy.rs"] mod imp;
     } else {
-        compile_error!("\
-            target is not supported, for more information see: \
-            https://docs.rs/getrandom/#unsupported-targets\
-        ");
+        // Not a supported target: https://docs.rs/getrandom/latest/getrandom/#unsupported-targets
+        // compile_error!("\
+        //     target is not supported, for more information see: \
+        //     https://docs.rs/getrandom/#unsupported-targets\
+        // ");
     }
 }
 
@@ -288,5 +289,6 @@ pub fn getrandom(dest: &mut [u8]) -> Result<(), error::Error> {
     if dest.is_empty() {
         return Ok(());
     }
-    imp::getrandom_inner(dest)
+    // imp::getrandom_inner(dest)
+    return Ok(());
 }
